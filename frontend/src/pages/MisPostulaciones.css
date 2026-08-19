@@ -1,0 +1,279 @@
+.mis-post-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f4f7fb;
+  color: #1e293b;
+  font-family: "Inter", "Segoe UI", sans-serif;
+}
+
+.mis-post-main {
+  flex: 1;
+  width: 100%;
+  padding: 1.5rem 1rem 3rem;
+}
+
+.mis-post-inner {
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+.mis-post-title {
+  margin: 0 0 0.35rem;
+  font-family: "Plus Jakarta Sans", "Segoe UI", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #0f2744;
+}
+
+.mis-post-sub {
+  margin: 0 0 1.25rem;
+  font-size: 0.9rem;
+  color: #64748b;
+  line-height: 1.45;
+}
+
+.mis-post-muted {
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.mis-post-error {
+  padding: 0.65rem 0.85rem;
+  border-radius: 0.5rem;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+  font-size: 0.88rem;
+}
+
+.mis-post-card {
+  padding: 1rem 1.1rem;
+  border-radius: 0.75rem;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 8px 24px rgba(15, 39, 68, 0.06);
+}
+
+.mis-post-card--notice p {
+  margin: 0 0 0.75rem;
+  font-size: 0.9rem;
+  color: #475569;
+  line-height: 1.45;
+}
+
+.mis-post-link-login {
+  display: inline-block;
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.mis-post-link-login:hover {
+  text-decoration: underline;
+}
+
+.mis-post-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.mis-post-item {
+  padding: 1rem 1.1rem;
+  border-radius: 0.75rem;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 6px 18px rgba(15, 39, 68, 0.05);
+}
+
+.mis-post-item-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.mis-post-estado {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #0369a1;
+  background: #e0f2fe;
+  padding: 0.25rem 0.5rem;
+  border-radius: 999px;
+}
+
+.mis-post-estado--pendiente {
+  color: #0369a1;
+  background: #e0f2fe;
+}
+
+.mis-post-estado--revision {
+  color: #92400e;
+  background: #fef3c7;
+}
+
+.mis-post-estado--aceptada {
+  color: #14532d;
+  background: #dcfce7;
+}
+
+.mis-post-estado--rechazada {
+  color: #b91c1c;
+  background: #fee2e2;
+}
+
+.mis-post-estado--cancelada {
+  color: #475569;
+  background: #e2e8f0;
+}
+
+.mis-post-estado--default {
+  color: #334155;
+  background: #e2e8f0;
+}
+
+.mis-post-item-cancelada {
+  margin: 0.4rem 0 0;
+  font-size: 0.78rem;
+  color: #64748b;
+  font-style: italic;
+}
+
+.mis-post-item-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.85rem;
+}
+
+.mis-post-cancel-confirm {
+  margin-top: 0.85rem;
+  padding: 0.75rem 0.9rem;
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  border-radius: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.mis-post-cancel-confirm p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #7c2d12;
+  line-height: 1.4;
+}
+
+.mis-post-cancel-actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.mis-post-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.5rem 0.85rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border-radius: 0.55rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s, border-color 0.18s;
+  font-family: inherit;
+}
+
+.mis-post-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.mis-post-btn--ghost {
+  background: #fff;
+  color: #1e293b;
+  border-color: #cbd5e1;
+}
+
+.mis-post-btn--ghost:hover:not(:disabled) {
+  background: #f1f5f9;
+}
+
+.mis-post-btn--ghost-danger {
+  background: #fff;
+  color: #b91c1c;
+  border-color: #fecaca;
+}
+
+.mis-post-btn--ghost-danger:hover:not(:disabled) {
+  background: #fef2f2;
+  border-color: #fca5a5;
+}
+
+.mis-post-btn--danger {
+  background: #dc2626;
+  color: #fff;
+  border-color: #dc2626;
+}
+
+.mis-post-btn--danger:hover:not(:disabled) {
+  background: #b91c1c;
+  border-color: #b91c1c;
+}
+
+.mis-post-btn .material-symbols-outlined {
+  font-size: 1.05rem !important;
+}
+
+.mis-post-fecha {
+  font-size: 0.78rem;
+  color: #64748b;
+}
+
+.mis-post-item-title {
+  margin: 0 0 0.35rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  font-family: "Plus Jakarta Sans", "Segoe UI", sans-serif;
+}
+
+.mis-post-item-title a {
+  color: #0f2744;
+  text-decoration: none;
+}
+
+.mis-post-item-title a:hover {
+  color: #14629e;
+  text-decoration: underline;
+}
+
+.mis-post-item-meta,
+.mis-post-item-vig,
+.mis-post-item-cierre {
+  margin: 0.15rem 0;
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+.mis-post-item-desc {
+  margin: 0.5rem 0 0;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: #475569;
+}
+
+.mis-post-item-obs {
+  margin: 0.6rem 0 0;
+  font-size: 0.82rem;
+  color: #334155;
+  line-height: 1.4;
+}

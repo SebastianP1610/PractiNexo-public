@@ -1,0 +1,484 @@
+{
+  "info": {
+    "name": "PractiNexo API - Automatizacion IEEE829",
+    "_postman_id": "4ebfbf26-997f-4f26-b4cb-1e521b86e6b8",
+    "description": "Coleccion automatizada para pruebas API sobre entorno desplegado de PractiNexo.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "CP-14-01 GET ofertas activas",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/ofertas?soloActivas=true",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "ofertas"
+          ],
+          "query": [
+            {
+              "key": "soloActivas",
+              "value": "true"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('HTTP 200', function () {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "",
+              "const bodyData = pm.response.json();",
+              "pm.test('Respuesta es array', function () {",
+              "  pm.expect(Array.isArray(bodyData)).to.eql(true);",
+              "});",
+              "",
+              "if (Array.isArray(bodyData) && bodyData.length > 0) {",
+              "  pm.collectionVariables.set('ofertaId', bodyData[0]._id);",
+              "}",
+              "",
+              "pm.test('Tiempo menor a 3000ms', function () {",
+              "  pm.expect(pm.response.responseTime).to.be.below(3000);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-14-02 POST login admin",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"correo\": \"{{adminEmail}}\",\n  \"password\": \"{{adminPassword}}\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/auth/login",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('HTTP 200', function () {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "",
+              "const bodyData = pm.response.json();",
+              "pm.test('Retorna token', function () {",
+              "  pm.expect(bodyData.token).to.be.a('string').and.not.empty;",
+              "});",
+              "",
+              "pm.collectionVariables.set('adminToken', bodyData.token);",
+              "pm.environment.set('adminToken', bodyData.token);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-01-06 GET validar-token sin token",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/auth/validar-token",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "auth",
+            "validar-token"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('HTTP 401', function () {",
+              "  pm.response.to.have.status(401);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-01-07 GET validar-token con token invalido",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer tokenfalso.abc.xyz"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/auth/validar-token",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "auth",
+            "validar-token"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('HTTP 401', function () {",
+              "  pm.response.to.have.status(401);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-14-03 GET dependencias con token",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/dependencias",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "dependencias"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('HTTP 200', function () {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "",
+              "const bodyData = pm.response.json();",
+              "pm.test('Dependencias en array', function () {",
+              "  pm.expect(Array.isArray(bodyData)).to.eql(true);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-14-04 GET categorias con token",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/categorias",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "categorias"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('HTTP 200', function () {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "",
+              "const bodyData = pm.response.json();",
+              "pm.test('Categorias en array', function () {",
+              "  pm.expect(Array.isArray(bodyData)).to.eql(true);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-11-01 POST matching sugerencias",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"programaAcademico\": \"Ingeniería de Sistemas\",\n  \"areaInteres\": \"Desarrollo\",\n  \"tipoOportunidadInteres\": \"PRACTICA\",\n  \"disponibilidad\": \"Remoto\",\n  \"palabrasClave\": [\"node\", \"react\"]\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/matching/sugerencias",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "matching",
+            "sugerencias"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('HTTP 200', function () {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "",
+              "const bodyData = pm.response.json();",
+              "pm.test('Respuesta con campo data', function () {",
+              "  pm.expect(bodyData).to.have.property('data');",
+              "});",
+              "pm.test('Data es array', function () {",
+              "  pm.expect(Array.isArray(bodyData.data)).to.eql(true);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-14-05 GET ruta inexistente",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/ruta-que-no-existe",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "ruta-que-no-existe"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('HTTP 404', function () {",
+              "  pm.response.to.have.status(404);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-14-STU-01 POST login estudiante",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"correo\": \"{{studentEmail}}\",\n  \"password\": \"{{studentPassword}}\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/estudiantes-auth/login",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "estudiantes-auth",
+            "login"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('HTTP 200', function () {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "",
+              "const bodyData = pm.response.json();",
+              "pm.test('Retorna token estudiante', function () {",
+              "  pm.expect(bodyData.token).to.be.a('string').and.not.empty;",
+              "});",
+              "pm.collectionVariables.set('studentToken', bodyData.token);",
+              "pm.environment.set('studentToken', bodyData.token);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-14-STU-02 GET perfil estudiante con token",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{studentToken}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/estudiantes/me",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "estudiantes",
+            "me"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('HTTP 200', function () {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "",
+              "const bodyData = pm.response.json();",
+              "pm.test('Incluye data', function () {",
+              "  pm.expect(bodyData).to.have.property('data');",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-14-STU-03 GET postulaciones de estudiante",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{studentToken}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/postulaciones/mis",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "postulaciones",
+            "mis"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('HTTP 200', function () {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "",
+              "const bodyData = pm.response.json();",
+              "pm.test('Incluye data', function () {",
+              "  pm.expect(bodyData).to.have.property('data');",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:4500/api"
+    },
+    {
+      "key": "adminEmail",
+      "value": ""
+    },
+    {
+      "key": "adminPassword",
+      "value": ""
+    },
+    {
+      "key": "studentEmail",
+      "value": ""
+    },
+    {
+      "key": "studentPassword",
+      "value": ""
+    },
+    {
+      "key": "adminToken",
+      "value": ""
+    },
+    {
+      "key": "studentToken",
+      "value": ""
+    },
+    {
+      "key": "ofertaId",
+      "value": ""
+    }
+  ]
+}

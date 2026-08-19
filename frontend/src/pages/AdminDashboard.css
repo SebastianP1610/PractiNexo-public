@@ -1,0 +1,81 @@
+.admin-dashboard {
+  padding: 2rem 1.5rem 3rem;
+  max-width: 960px;
+}
+
+.admin-dashboard-head {
+  margin-bottom: 2rem;
+}
+
+.admin-dashboard-title {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.5rem, 3vw, 1.85rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #0f2744;
+}
+
+.admin-dashboard-sub {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: #64748b;
+}
+
+.admin-dashboard-sub strong {
+  color: #14629e;
+}
+
+.admin-dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+
+.admin-dash-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.35rem;
+  border-radius: 1rem;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 20px rgba(15, 39, 68, 0.06);
+  text-decoration: none;
+  color: inherit;
+  transition:
+    box-shadow 0.2s,
+    border-color 0.2s,
+    transform 0.2s;
+}
+
+.admin-dash-card:hover {
+  border-color: rgba(20, 98, 158, 0.35);
+  box-shadow: 0 12px 32px rgba(20, 98, 158, 0.12);
+  transform: translateY(-2px);
+}
+
+.admin-dash-card-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: #0f2744;
+}
+
+.admin-dash-card-desc {
+  margin: 0;
+  flex: 1;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #64748b;
+}
+
+.admin-dash-card-cta {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #14629e;
+}
+
+.admin-dash-card:hover .admin-dash-card-cta {
+  color: #6f26f6;
+}

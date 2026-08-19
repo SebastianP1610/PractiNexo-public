@@ -1,0 +1,19 @@
+.aider*
+node_modules/
+frontend/node_modules/
+backend/node_modules/
+frontend/playwright-report/
+frontend/test-results/
+evidencias/
+.vite/
+*.log
+backend/nul
+nul
+
+# Secretos / entornos (NO commitear; sí mantener los .example)
+.env
+.env.*
+!.env.example
+!.env.e2e.example
+frontend/.env.e2e
+backend/uploads/
