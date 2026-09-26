@@ -16,9 +16,12 @@ const authRoutes = require('./routes/authRoutes');
 const ofertaRoutes = require('./routes/ofertaRoutes');
 const dependenciaRoutes = require('./routes/dependenciaRoutes');
 const categoriaRoutes = require('./routes/categoriaRoutes');
+const programaAcademicoRoutes = require('./routes/programaAcademicoRoutes');
 const matchingRoutes = require('./routes/matchingRoutes');
 const estudianteAuthRoutes = require('./routes/estudianteAuthRoutes');
 const estudianteRoutes = require('./routes/estudianteRoutes');
+const estudianteAdminRoutes = require('./routes/estudianteAdminRoutes');
+const reporteRoutes = require('./routes/reporteRoutes');
 const postulacionRoutes = require('./routes/postulacionRoutes');
 
 const app = express();
@@ -72,6 +75,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/ofertas', ofertaRoutes);
 app.use('/api/dependencias', dependenciaRoutes);
 app.use('/api/categorias', categoriaRoutes);
+app.use('/api/programas', programaAcademicoRoutes);
 app.use('/api/matching', matchingRoutes);
 app.use('/api/estudiantes-auth/login', authLimiter);
 app.use('/api/estudiantes-auth/forgot-password', authLimiter);
@@ -79,6 +83,8 @@ app.use('/api/estudiantes-auth/reset-password', authLimiter);
 app.use('/api/estudiantes-auth/register', registerLimiter);
 app.use('/api/estudiantes-auth', estudianteAuthRoutes);
 app.use('/api/estudiantes', estudianteRoutes);
+app.use('/api/admin/estudiantes', estudianteAdminRoutes);
+app.use('/api/reportes', reporteRoutes);
 app.use('/api/postulaciones', postulacionRoutes);
 
 app.use('/api', (_req, res) => {

@@ -28,7 +28,7 @@ const env = cleanEnv(process.env, {
   JWT_EXPIRES_IN: str({ default: '24h' }),
   CORS_ORIGINS: str({ default: 'http://localhost:5173' }),
   RATE_LIMIT_WINDOW_MS: num({ default: 900000 }),
-  RATE_LIMIT_MAX: num({ default: 100 }),
+  RATE_LIMIT_MAX: num({ default: 500 }),
 });
 
 module.exports = env;

@@ -4,7 +4,7 @@ import securityPlugin from "eslint-plugin-security";
 
 export default [
   {
-    ignores: ["node_modules/**", "uploads/**", "backend.log"],
+    ignores: ["node_modules/**", "uploads/**", "backend.log", "coverage/**", "coverage-integration/**"],
   },
   {
     files: ["**/*.js"],

@@ -50,6 +50,34 @@ function AdminDashboard() {
           </p>
           <span className="admin-dash-card-cta">Abrir →</span>
         </Link>
+        <Link to="/admin/programas" className="admin-dash-card">
+          <h2 className="admin-dash-card-title">Programas académicos</h2>
+          <p className="admin-dash-card-desc">
+            Catálogo maestro de programas usados en ofertas y perfiles de estudiante.
+          </p>
+          <span className="admin-dash-card-cta">Abrir →</span>
+        </Link>
+        <Link to="/admin/estudiantes" className="admin-dash-card">
+          <h2 className="admin-dash-card-title">Estudiantes</h2>
+          <p className="admin-dash-card-desc">
+            Gestión completa de estudiantes registrados: crear, editar y administrar estados.
+          </p>
+          <span className="admin-dash-card-cta">Abrir →</span>
+        </Link>
+        <Link to="/admin/reporte-ofertas" className="admin-dash-card">
+          <h2 className="admin-dash-card-title">Reporte de ofertas</h2>
+          <p className="admin-dash-card-desc">
+            Estadísticas de ofertas por estado, tipo y dependencia con exportación CSV.
+          </p>
+          <span className="admin-dash-card-cta">Abrir →</span>
+        </Link>
+        <Link to="/admin/reporte-postulaciones" className="admin-dash-card">
+          <h2 className="admin-dash-card-title">Reporte de postulaciones</h2>
+          <p className="admin-dash-card-desc">
+            Estadísticas de postulaciones por estado, estudiante y oferta con exportación CSV.
+          </p>
+          <span className="admin-dash-card-cta">Abrir →</span>
+        </Link>
       </div>
     </div>
   );

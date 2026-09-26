@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { fetchOfertas } from "../api/ofertas";
 import { fetchDependencias } from "../api/dependencias";
+import { fetchProgramas } from "../api/programas";
 import { getApiErrorMessage } from "../api/httpError";
 import { esUrgente } from "../utils/format";
 import AppFooter from "../components/AppFooter";
@@ -16,18 +17,6 @@ const initialFiltros = {
 };
 
 const CARD_ICONS = ["rocket_launch", "science", "campaign"];
-
-/** Extrae los `programaAcademico` únicos y no vacíos de una lista de ofertas. */
-function extraerProgramas(ofertasList) {
-  const set = new Set();
-  for (const o of ofertasList) {
-    const prog = (o?.programaAcademico || "").trim();
-    if (prog) set.add(prog);
-  }
-  return Array.from(set)
-    .sort((a, b) => a.localeCompare(b, "es"))
-    .map((value) => ({ value, label: value }));
-}
 
 const FEATURED_IMG = "/matching-hero.jpg";
 
@@ -61,6 +50,7 @@ function OfertasEstudiante() {
   const navigate = useNavigate();
   const [ofertas, setOfertas] = useState([]);
   const [dependencias, setDependencias] = useState([]);
+  const [programas, setProgramas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [filtros, setFiltros] = useState(initialFiltros);
@@ -83,9 +73,10 @@ function OfertasEstudiante() {
     setLoading(true);
     setError("");
     try {
-      const [rOfertas, rDeps] = await Promise.allSettled([
+      const [rOfertas, rDeps, rProg] = await Promise.allSettled([
         fetchOfertas(buildQueryParams(filtros, page)),
         fetchDependencias(),
+        fetchProgramas(),
       ]);
 
       if (rOfertas.status === "fulfilled") {
@@ -104,6 +95,14 @@ function OfertasEstudiante() {
 
       if (rDeps.status === "fulfilled") {
         setDependencias(Array.isArray(rDeps.value) ? rDeps.value : []);
+      }
+
+      if (rProg.status === "fulfilled") {
+        setProgramas(
+          (Array.isArray(rProg.value) ? rProg.value : []).filter(
+            (p) => p.estado === "ACTIVO",
+          ),
+        );
       }
     } finally {
       setLoading(false);
@@ -130,7 +129,10 @@ function OfertasEstudiante() {
   const listaPrincipal = usarDestacada ? ofertasActivas.slice(0, -1) : ofertasActivas;
   const ofertaDestacada = usarDestacada ? ofertasActivas[ofertasActivas.length - 1] : null;
 
-  const programasDisponibles = extraerProgramas(ofertasActivas);
+  const programasDisponibles = programas.map((p) => ({
+    value: p.nombre,
+    label: p.nombre,
+  }));
 
   const hayFiltros =
     filtros.tipo ||

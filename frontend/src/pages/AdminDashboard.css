@@ -9,9 +9,8 @@
 
 .admin-dashboard-title {
   margin: 0 0 0.5rem;
-  font-size: clamp(1.5rem, 3vw, 1.85rem);
-  font-weight: 800;
-  letter-spacing: -0.02em;
+  font-size: 1.6rem;
+  font-weight: 600;
   color: #0f2744;
 }
 

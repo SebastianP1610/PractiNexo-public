@@ -17,3 +17,5 @@ nul
 !.env.e2e.example
 frontend/.env.e2e
 backend/uploads/
+backend/coverage/
+backend/coverage-integration/

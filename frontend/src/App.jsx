@@ -5,6 +5,10 @@ import Login from "./pages/Login";
 import CrearOferta from "./pages/CrearOferta";
 import GestionarOfertas from "./pages/GestionarOfertas";
 import MaestrasAdmin from "./pages/MaestrasAdmin";
+import GestionarProgramas from "./pages/GestionarProgramas";
+import GestionarEstudiantes from "./pages/GestionarEstudiantes";
+import ReporteOfertas from "./pages/ReporteOfertas";
+import ReportePostulaciones from "./pages/ReportePostulaciones";
 import AdminDashboard from "./pages/AdminDashboard";
 import PostulacionesAdmin from "./pages/PostulacionesAdmin";
 import InicioEstudiante from "./pages/InicioEstudiante";
@@ -41,6 +45,10 @@ function App() {
         >
           <Route index element={<AdminDashboard />} />
           <Route path="maestras" element={<MaestrasAdmin />} />
+          <Route path="programas" element={<GestionarProgramas />} />
+          <Route path="estudiantes" element={<GestionarEstudiantes />} />
+          <Route path="reporte-ofertas" element={<ReporteOfertas />} />
+          <Route path="reporte-postulaciones" element={<ReportePostulaciones />} />
           <Route path="ofertas" element={<GestionarOfertas />} />
           <Route path="crear-oferta" element={<CrearOferta />} />
           <Route path="postulaciones" element={<PostulacionesAdmin />} />

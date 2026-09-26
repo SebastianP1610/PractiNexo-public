@@ -57,6 +57,22 @@ function AdminLayout() {
             <span className="admin-nav-dot" aria-hidden="true" />
             Maestras
           </NavLink>
+          <NavLink to="/admin/programas" className="admin-nav-link">
+            <span className="admin-nav-dot" aria-hidden="true" />
+            Programas
+          </NavLink>
+          <NavLink to="/admin/estudiantes" className="admin-nav-link">
+            <span className="admin-nav-dot" aria-hidden="true" />
+            Estudiantes
+          </NavLink>
+          <NavLink to="/admin/reporte-ofertas" className="admin-nav-link">
+            <span className="admin-nav-dot" aria-hidden="true" />
+            Reporte ofertas
+          </NavLink>
+          <NavLink to="/admin/reporte-postulaciones" className="admin-nav-link">
+            <span className="admin-nav-dot" aria-hidden="true" />
+            Reporte postulaciones
+          </NavLink>
         </nav>
 
         <div className="admin-sidebar-footer">

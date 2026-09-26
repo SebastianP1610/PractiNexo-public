@@ -17,8 +17,9 @@
 
 .post-title {
   margin: 0;
-  font-size: 1.5rem;
-  color: #0f172a;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #0f2744;
 }
 
 .post-sub {

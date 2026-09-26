@@ -1,6 +1,6 @@
 .maestras-page {
   padding: 1.25rem 1.5rem 2.5rem;
-  font-family: system-ui, "Segoe UI", Roboto, sans-serif;
+  font-family: inherit;
   color: #0f172a;
   box-sizing: border-box;
 }
@@ -12,10 +12,9 @@
 
 .maestras-title {
   margin: 0 0 0.25rem;
-  font-size: 1.65rem;
-  font-weight: 800;
+  font-size: 1.6rem;
+  font-weight: 600;
   color: #0f2744;
-  letter-spacing: -0.02em;
 }
 
 .maestras-banner {

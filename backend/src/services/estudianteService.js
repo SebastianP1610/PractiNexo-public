@@ -1,14 +1,6 @@
 const bcrypt = require('bcryptjs');
 const Estudiante = require('../models/estudiante');
-
-function sanitizarEstudiante(estudiante) {
-  if (!estudiante) return null;
-  const obj = estudiante.toObject ? estudiante.toObject() : estudiante;
-  delete obj.passwordHash;
-  delete obj.resetPasswordTokenHash;
-  delete obj.resetPasswordExpires;
-  return obj;
-}
+const { sanitizarRespuestaAdmin: sanitizarEstudiante } = require('./estudianteAdminValidators');
 
 async function obtenerEstudiantePorId(id) {
   const estudiante = await Estudiante.findById(id).select('-passwordHash -resetPasswordTokenHash -resetPasswordExpires');

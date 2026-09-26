@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { fetchCategorias } from "../api/categorias";
 import { fetchDependencias } from "../api/dependencias";
+import { fetchProgramas } from "../api/programas";
 import { getApiErrorMessage } from "../api/httpError";
 import {
   createOferta,
@@ -152,6 +153,7 @@ function CrearOferta() {
   const [form, setForm] = useState(initialForm);
   const [dependencias, setDependencias] = useState([]);
   const [categorias, setCategorias] = useState([]);
+  const [programas, setProgramas] = useState([]);
   const [ofertasPreview, setOfertasPreview] = useState([]);
   const [loadError, setLoadError] = useState("");
   const [submitError, setSubmitError] = useState("");
@@ -167,10 +169,11 @@ function CrearOferta() {
     setLoadError("");
     setLoadingInitial(true);
 
-    const [rDeps, rCats, rOf] = await Promise.allSettled([
+    const [rDeps, rCats, rOf, rProg] = await Promise.allSettled([
       fetchDependencias(),
       fetchCategorias(),
       fetchOfertas(),
+      fetchProgramas(),
     ]);
 
     if (rDeps.status === "fulfilled" && Array.isArray(rDeps.value)) {
@@ -188,11 +191,17 @@ function CrearOferta() {
     } else {
       setOfertasPreview([]);
     }
+    if (rProg.status === "fulfilled" && Array.isArray(rProg.value)) {
+      setProgramas(rProg.value.filter((p) => p.estado === "ACTIVO"));
+    } else {
+      setProgramas([]);
+    }
 
     const fallos = [];
     if (rDeps.status === "rejected") fallos.push("dependencias");
     if (rCats.status === "rejected") fallos.push("categorías");
     if (rOf.status === "rejected") fallos.push("ofertas");
+    if (rProg.status === "rejected") fallos.push("programas");
     if (fallos.length) {
       setLoadError(
         `No se pudo cargar: ${fallos.join(", ")}. Comprueba el backend (GET /api/...).`,
@@ -493,12 +502,25 @@ function CrearOferta() {
           <div className="oferta-crear-grid3">
             <label className="oferta-field">
               <span>Programa académico</span>
-              <input
+              <select
                 name="programaAcademico"
                 value={form.programaAcademico}
                 onChange={handleChange}
                 disabled={submitting}
-              />
+              >
+                <option value="">Todos los programas</option>
+                {programas.map((p) => (
+                  <option key={p._id} value={p.nombre}>
+                    {p.nombre}
+                  </option>
+                ))}
+                {form.programaAcademico &&
+                !programas.some((p) => p.nombre === form.programaAcademico) ? (
+                  <option value={form.programaAcademico}>
+                    {form.programaAcademico} (no está en el catálogo)
+                  </option>
+                ) : null}
+              </select>
             </label>
             <label className="oferta-field">
               <span>Área de interés</span>

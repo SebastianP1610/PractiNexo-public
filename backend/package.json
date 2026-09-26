@@ -9,6 +9,10 @@
     "seed:admin": "node src/scripts/seedAdmin.js",
     "seed:beta": "node src/scripts/seedBeta.js",
     "test": "vitest run",
+    "test:unit": "vitest run --config vitest.config.js",
+    "test:integration": "vitest run --config vitest.integration.config.js",
+    "test:coverage": "vitest run --config vitest.config.js --coverage",
+    "test:all": "npm run test:unit && npm run test:integration",
     "test:watch": "vitest",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
@@ -32,9 +36,11 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",
+    "@vitest/coverage-v8": "^4.1.9",
     "eslint": "^9.39.4",
     "eslint-plugin-security": "^4.0.1",
     "globals": "^17.7.0",
+    "mongodb-memory-server": "^10.4.3",
     "nodemon": "^3.1.10",
     "vitest": "^4.1.9"
   }
